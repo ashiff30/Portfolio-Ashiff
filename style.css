@@ -4,6 +4,14 @@
     font-family: "Poppins", sans-serif;
 }
 
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+  }
+
 .navbar{
     opacity: 0.9;
 }
@@ -49,9 +57,17 @@
     box-shadow: 4px 4px rgb(22, 21, 21);
 }
 
+.banner-content.text{
+    position: relative;
+}
 
+.banner-content.text.anim-text{
+    color: whitesmoke;
+}
 
-
+.toast{
+    margin-left: 20%;
+}
 
 @media (max-width:576px){
     .icon-section{
