@@ -1,301 +1,638 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="icon" href="code.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashiff Mohammed — Technical Support &amp; Frontend Engineer</title>
+<meta name="description" content="Portfolio of Ashiff Mohammed M.S — Technical Support Engineer &amp; Frontend Developer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0E2A47;
+    --bg-deep:#0A2036;
+    --panel:#123456;
+    --panel-light:#17416A;
+    --grid: rgba(244,247,250,0.055);
+    --grid-strong: rgba(244,247,250,0.14);
+    --ink:#F4F7FA;
+    --muted:#93AAC4;
+    --muted-dim:#5F7995;
+    --accent:#FFB454;
+    --accent-ink:#3A2405;
+    --cyan:#6FD3E8;
+    --live:#7EDBAA;
+    --border:rgba(244,247,250,0.18);
+    --font-display:'Space Grotesk', sans-serif;
+    --font-body:'IBM Plex Sans', sans-serif;
+    --font-mono:'IBM Plex Mono', monospace;
+  }
 
-    <title>Portfolio</title>
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.6;
+    position:relative;
+    overflow-x:hidden;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  ::selection{ background:var(--accent); color:var(--accent-ink); }
+
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+
+  .corner-mark{
+    position:fixed;
+    width:22px; height:22px;
+    z-index:40;
+    pointer-events:none;
+    opacity:0.5;
+  }
+  .corner-mark::before, .corner-mark::after{
+    content:'';
+    position:absolute;
+    background:var(--muted);
+  }
+  .corner-mark::before{ width:100%; height:1px; top:50%; }
+  .corner-mark::after{ height:100%; width:1px; left:50%; }
+  .corner-mark.tl{ top:14px; left:14px; }
+  .corner-mark.tr{ top:14px; right:14px; }
+  .corner-mark.bl{ bottom:14px; left:14px; }
+  .corner-mark.br{ bottom:14px; right:14px; }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  /* NAV */
+  header{
+    position:fixed; top:0; left:0; right:0;
+    z-index:50;
+    background:rgba(10,32,54,0.82);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--border);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:66px;
+  }
+  .brand{
+    font-family:var(--font-mono);
+    font-size:14px;
+    letter-spacing:0.06em;
+    color:var(--ink);
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .dot{ width:8px; height:8px; border-radius:50%; background:var(--live); box-shadow:0 0 8px var(--live); }
+  .navlinks{ display:flex; gap:32px; list-style:none; }
+  .navlinks a{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.12em;
+    color:var(--muted);
+    position:relative;
+    padding-bottom:4px;
+    transition:color 0.2s ease;
+  }
+  .navlinks a::before{ content:'· '; color:var(--accent); }
+  .navlinks a:hover, .navlinks a:focus-visible{ color:var(--ink); }
+  .navlinks a::after{
+    content:''; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--accent);
+    transition:right 0.25s ease;
+  }
+  .navlinks a:hover::after, .navlinks a:focus-visible::after{ right:0; }
+  .navToggle{ display:none; background:none; border:1px solid var(--border); color:var(--ink); width:38px; height:38px; border-radius:4px; cursor:pointer; }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  /* HERO */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:66px;
+  }
+  @keyframes rise-in{
+    from{ opacity:0; transform:translateY(22px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .hero-anim{ opacity:0; animation:rise-in 0.7s ease forwards; }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    color:var(--cyan);
+    display:flex; gap:14px; flex-wrap:wrap;
+    margin-bottom:22px;
+    animation-delay:0.05s;
+  }
+  .eyebrow span{ color:var(--muted-dim); }
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(2.6rem, 7vw, 5.4rem);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    max-width:15ch;
+    animation-delay:0.2s;
+  }
+  .hero h1 .accent{ color:var(--accent); }
+  .hero-role{
+    font-family:var(--font-mono);
+    font-size:clamp(14px, 2vw, 18px);
+    color:var(--muted);
+    margin-top:20px;
+    max-width:52ch;
+    border-left:2px solid var(--accent);
+    padding-left:14px;
+    animation-delay:0.38s;
+  }
+  .hero-cta{ display:flex; gap:16px; margin-top:36px; flex-wrap:wrap; animation-delay:0.54s; }
+  @media (prefers-reduced-motion: reduce){
+    .hero-anim{ opacity:1; animation:none; }
+  }
+  .btn{
+    font-family:var(--font-mono);
+    font-size:13px;
+    letter-spacing:0.06em;
+    padding:13px 24px;
+    border-radius:2px;
+    border:1px solid var(--border);
+    transition:transform 0.15s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    display:inline-flex; align-items:center; gap:8px;
+    cursor:pointer;
+  }
+  .btn-primary{ background:var(--accent); color:var(--accent-ink); border-color:var(--accent); font-weight:600; }
+  .btn-primary:hover{ background:#ffc978; transform:translateY(-2px); box-shadow:0 6px 18px rgba(255,180,84,0.25); }
+  .btn-ghost{ color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+  .btn:active{ transform:translateY(0) scale(0.96); box-shadow:none; }
+
+  /* Title block - drafting sheet corner card */
+  .title-block{
+    position:absolute;
+    right:28px;
+    bottom:40px;
+    width:280px;
+    border:1px solid var(--border);
+    background:rgba(18,52,86,0.55);
+    backdrop-filter:blur(4px);
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    display:none;
+  }
+  .title-block .tb-row{
+    display:flex; justify-content:space-between;
+    padding:9px 12px;
+    border-bottom:1px solid var(--border);
+    color:var(--muted);
+  }
+  .title-block .tb-row:last-child{ border-bottom:none; }
+  .title-block .tb-row b{ color:var(--ink); font-weight:500; text-align:right; }
+
+  .scroll-hint{
+    position:absolute; bottom:16px; left:28px;
+    font-family:var(--font-mono); font-size:11px; color:var(--muted-dim);
+    display:flex; align-items:center; gap:8px;
+  }
+  .scroll-hint .line{ width:32px; height:1px; background:var(--muted-dim); animation:pulse-line 2.4s ease-in-out infinite; }
+  @keyframes pulse-line{ 0%,100%{ opacity:0.3; } 50%{ opacity:1; } }
+
+  /* SECTION SHEET HEADER */
+  section{ position:relative; padding:110px 0 90px; }
+  .sheet-header{
+    display:flex; align-items:baseline; gap:18px; margin-bottom:56px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:20px;
+  }
+  .sheet-num{
+    font-family:var(--font-mono); font-size:13px; color:var(--accent);
+    letter-spacing:0.1em; white-space:nowrap;
+    display:inline-block;
+    transform:scale(1.6) rotate(-6deg);
+    opacity:0;
+    transition:transform 0.45s cubic-bezier(.2,1.4,.4,1), opacity 0.35s ease;
+  }
+  .reveal.in .sheet-num{
+    transform:scale(1) rotate(0deg);
+    opacity:1;
+  }
+  .sheet-header h2{
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(1.7rem, 4vw, 2.6rem);
+  }
+  .sheet-tag{
+    margin-left:auto;
+    font-family:var(--font-mono); font-size:11px; color:var(--muted-dim);
+    letter-spacing:0.08em;
+  }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity 0.6s ease, transform 0.6s ease; transition-delay:var(--reveal-delay, 0s); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ABOUT */
+  .about-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:56px;
+  }
+  .about-grid p{ color:var(--muted); margin-bottom:16px; max-width:60ch; }
+  .about-grid p b{ color:var(--ink); font-weight:600; }
+  .spec-panel{
+    border:1px solid var(--border);
+    background:var(--panel);
+    align-self:start;
+  }
+  .spec-panel .spec-title{
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.1em;
+    color:var(--accent); padding:14px 18px; border-bottom:1px solid var(--border);
+  }
+  .spec-row{
+    display:flex; justify-content:space-between; gap:12px;
+    padding:13px 18px; border-bottom:1px solid var(--border);
+    font-size:13.5px;
+  }
+  .spec-row:last-child{ border-bottom:none; }
+  .spec-row .k{ font-family:var(--font-mono); color:var(--muted-dim); font-size:11.5px; letter-spacing:0.04em; }
+  .spec-row .v{ color:var(--ink); text-align:right; font-weight:500; }
+
+  /* SKILLS - legend grid */
+  .legend-grid{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr));
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+  }
+  .legend-cell{
+    background:var(--bg-deep);
+    padding:26px 16px;
+    display:flex; flex-direction:column; align-items:center; gap:12px;
+    transition:background 0.2s ease;
+  }
+  .legend-cell:hover{ background:var(--panel); }
+  .legend-cell img{ width:40px; height:40px; object-fit:contain; }
+  .legend-cell span{ font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em; color:var(--muted); text-align:center; }
+  .legend-caption{
+    font-family:var(--font-mono); font-size:11px; color:var(--muted-dim);
+    margin-top:16px; letter-spacing:0.04em;
+  }
+  .legend-caption span{ color:var(--accent); }
+
+  /* PROJECTS - ticket cards */
+  .ticket-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:24px;
+  }
+  .ticket{
+    border:1px solid var(--border);
+    background:var(--panel);
+    overflow:hidden;
+    display:flex; flex-direction:column;
+    transition:border-color 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+  .ticket:hover{ border-color:var(--accent); box-shadow:0 16px 32px rgba(0,0,0,0.35); }
+  .ticket-img{
+    aspect-ratio:16/10; overflow:hidden; background:var(--bg-deep);
+    border-bottom:1px solid var(--border);
+  }
+  .ticket-img img{ width:100%; height:100%; object-fit:cover; transition:transform 0.4s ease; }
+  .ticket:hover .ticket-img img{ transform:scale(1.05); }
+  .ticket-body{ padding:20px 22px 24px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .ticket-meta{
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:var(--font-mono); font-size:11px; letter-spacing:0.06em;
+  }
+  .ticket-id{ color:var(--muted-dim); }
+  .status-pill{
+    padding:3px 10px; border-radius:20px; font-size:10px; letter-spacing:0.08em;
+    border:1px solid currentColor;
+    transition:box-shadow 0.25s ease;
+  }
+  .ticket:hover .status-pill{ box-shadow:0 0 10px currentColor; }
+  .status-pill.live{ color:var(--live); }
+  .status-pill.deployed{ color:var(--cyan); }
+  .status-pill.resolved{ color:var(--accent); }
+  .ticket h3{ font-family:var(--font-display); font-size:1.25rem; font-weight:600; }
+  .ticket p{ color:var(--muted); font-size:13.5px; flex:1; }
+  .ticket-link{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:0.06em;
+    color:var(--ink); display:inline-flex; align-items:center; gap:6px;
+    margin-top:6px; width:fit-content; padding-bottom:2px;
+    border-bottom:1px solid var(--border);
+  }
+  .ticket-link:hover{ color:var(--accent); border-color:var(--accent); }
+
+  /* CONTACT */
+  .contact-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:56px;
+  }
+  .contact-form{ display:flex; flex-direction:column; gap:18px; }
+  .field{ display:flex; flex-direction:column; gap:8px; }
+  .field label{ font-family:var(--font-mono); font-size:11px; letter-spacing:0.08em; color:var(--muted-dim); }
+  .field input, .field textarea{
+    background:var(--panel);
+    border:1px solid var(--border);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:14px;
+    padding:12px 14px;
+    border-radius:2px;
+    resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{ border-color:var(--accent); }
+  .submit-row{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .form-note{ font-family:var(--font-mono); font-size:11px; color:var(--muted-dim); }
+
+  .contact-info{ display:flex; flex-direction:column; gap:14px; }
+  .info-row{
+    display:flex; align-items:center; gap:14px;
+    border:1px solid var(--border);
+    padding:16px 18px;
+    background:var(--panel);
+  }
+  .info-row .k{ font-family:var(--font-mono); font-size:10.5px; color:var(--muted-dim); letter-spacing:0.08em; width:64px; flex-shrink:0; }
+  .info-row a, .info-row span.v{ font-size:14px; color:var(--ink); font-weight:500; }
+  .info-row a:hover{ color:var(--accent); }
+  .status-card{
+    border:1px solid var(--border); background:var(--bg-deep);
+    padding:18px; font-family:var(--font-mono); font-size:11.5px; color:var(--muted);
+    display:flex; align-items:center; gap:10px;
+  }
+  .status-card .dot{ width:8px; height:8px; border-radius:50%; background:var(--live); box-shadow:0 0 8px var(--live); flex-shrink:0; }
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:28px 0;
+    font-family:var(--font-mono); font-size:11px; color:var(--muted-dim);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:860px){
+    .navlinks{
+      position:fixed; top:66px; left:0; right:0;
+      flex-direction:column; gap:0;
+      background:var(--bg-deep);
+      border-bottom:1px solid var(--border);
+      max-height:0; overflow:hidden;
+      transition:max-height 0.3s ease;
+    }
+    .navlinks.open{ max-height:280px; }
+    .navlinks li{ border-bottom:1px solid var(--border); }
+    .navlinks a{ display:block; padding:16px 28px; }
+    .navlinks a::before{ display:none; }
+    .navToggle{ display:block; }
+    .title-block{ display:none; }
+    .about-grid, .contact-grid{ grid-template-columns:1fr; }
+    .ticket-grid{ grid-template-columns:1fr; }
+    section{ padding:76px 0 60px; }
+  }
+</style>
 </head>
 <body>
 
-  <div class="progress">
-    <div id="scrollProgress" class="progress-bar bg-dark"  role="progressbar" style="width: 0%; height: 8px ;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+<span class="corner-mark tl" aria-hidden="true"></span>
+<span class="corner-mark tr" aria-hidden="true"></span>
+<span class="corner-mark bl" aria-hidden="true"></span>
+<span class="corner-mark br" aria-hidden="true"></span>
+
+<header>
+  <nav class="wrap">
+    <a href="#" class="brand"><span class="dot"></span>ASHIFF.M.S</a>
+    <ul class="navlinks" id="navlinks">
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#skills">SKILLS</a></li>
+      <li><a href="#projects">PROJECTS</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+    <button class="navToggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  </nav>
+</header>
+
+<section class="hero wrap">
+  <div class="eyebrow hero-anim">
+    <span>LOC:</span> CHENNAI, IN &nbsp;/&nbsp; <span>SHEET</span> 01 OF 04 &nbsp;/&nbsp; <span>STATUS</span> OPEN TO WORK
+  </div>
+  <h1 class="hero-anim">Technical Support Engineer &amp; <span class="accent">Frontend&nbsp;Developer.</span></h1>
+  <p class="hero-role hero-anim">I'm Ashiff Mohammed — I keep network operations running at Tech&nbsp;Mahindra by day, and build clean, responsive interfaces by night. Precision on one side, creativity on the other.</p>
+  <div class="hero-cta hero-anim">
+    <a class="btn btn-primary" href="Ashiff%20Mohammed%20M%20S.pdf" target="_blank" rel="noopener">↓ DOWNLOAD RESUME</a>
+    <a class="btn btn-ghost" href="#contact">GET IN TOUCH</a>
   </div>
 
-  <nav class="navbar navbar-expand-lg bg-body-tertiary py-4 sticky-top text-uppercase">
-    <div class="container">
-      <a class="navbar-brand opacity-100" href="#">Ashiff Mohammed</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ms-auto opacity-100">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#about">ABOUT</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#Projects">PROJECTS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#skill">Skill</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#contact">CONTACT</a>
-          </li>
-        </ul>
-      </div>
+  <div class="title-block" aria-hidden="true">
+    <div class="tb-row"><span>DRAWN BY</span><b>A. MOHAMMED</b></div>
+    <div class="tb-row"><span>ROLE</span><b>SUPPORT / FRONTEND</b></div>
+    <div class="tb-row"><span>TOOLS</span><b>ARCGIS · SALESFORCE</b></div>
+    <div class="tb-row"><span>REV</span><b>2.0</b></div>
+  </div>
+
+  <div class="scroll-hint"><span class="line"></span>SCROLL TO EXPLORE</div>
+</section>
+
+<section id="about" class="wrap">
+  <div class="sheet-header reveal">
+    <span class="sheet-num">SHEET 02</span>
+    <h2>About me.</h2>
+    <span class="sheet-tag">INTRODUCTION</span>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <p>Hi, I'm Ashiff — an enthusiastic <b>Technical Support</b> and <b>Web Design</b> professional with a foot in both network operations. At Tech Mahindra, I work with ArcGIS, Salesforce, GeoHUB, and Orion to diagnose network enquiries and keep service delivery running smoothly for a UK telecom infrastructure client.</p>
+      <p>Alongside that, I build responsive, user-friendly interfaces with HTML, CSS, Bootstrap, and React. The two disciplines feed each other: the same habit of tracing a problem to its root in a ticket queue is what I use to debug a layout or a broken component.</p>
+      <p>This portfolio holds a handful of projects — from responsive layouts to data analysis — that reflect that mix of technical precision and creative problem-solving.</p>
     </div>
-  </nav>
-
-  <section class="banner fs-3 w-80 text-uppercase" >
-    <div class="container text-light">
-      <div class="row">
-        <div class="col-md-6 banner-content" >
-          <h1>HI, I'M</h1>
-          <h1><span style="color: #EEEEEE;">ASHIFF</span> MOHAMMED.M.S</h1>
-          <!--<p style="color: #706C61;">a <span class="text anim-text"> full stack developer</span></p>-->
-          <a href="Ashiff Mohammed M S.pdf" target="_blank" class="resume-button"><button type="button" class="btn btn-outline-light">Resume</button></a>
-        </div>
-      </div>
+    <div class="spec-panel reveal">
+      <div class="spec-title">SPEC — CURRENT STACK</div>
+      <div class="spec-row"><span class="k">FRONTEND</span><span class="v">HTML · CSS · Bootstrap · React</span></div>
+      <div class="spec-row"><span class="k">BACKEND</span><span class="v">Python (in progress)</span></div>
+      <div class="spec-row"><span class="k">DATABASE</span><span class="v">MySQL</span></div>
+      <div class="spec-row"><span class="k">SUPPORT TOOLS</span><span class="v">Salesforce · ArcGIS · GeoHUB · Orion · Genesys</span></div>
+      <div class="spec-row"><span class="k">BASED IN</span><span class="v">Chennai, India</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="about">
-    <div class="container py-4">
-      <div class="row ">
-        <div class="col-md-12">
-          <p>Introduction</p>
-          <h1>About me.</h1>
-          <p>Hi, I'm Ashiff, an enthusiastic Technical Support and Web Design professional with experience in network planning, customer support, and frontend design. Currently working at Tech Mahindra, I specialize in using tools like ArcGIS, Salesforce, GeoHUB, Piper, and Orion to analyze network enquiries and ensure seamless service delivery.</p>
-          <p>Alongside my support role, I have a strong interest in responsive web design and frontend development using HTML, CSS, Bootstrap, and React. My approach blends technical precision with creative problem-solving to deliver reliable and user-friendly digital experiences.</p>  
-          <p>In this portfolio, you’ll find a mix of my projects — from responsive web designs and UI layouts to data visualization and functional web apps — each reflecting my eye for detail and drive for continuous improvement.</p>
-            </div>
+<section id="skills" class="wrap">
+  <div class="sheet-header reveal">
+    <span class="sheet-num">SHEET 03</span>
+    <h2>Technologies.</h2>
+    <span class="sheet-tag">LEGEND / KEY</span>
+  </div>
+  <div class="legend-grid reveal">
+    <div class="legend-cell"><img src="html.png" alt="HTML5" loading="lazy"><span>HTML5</span></div>
+    <div class="legend-cell"><img src="css.png" alt="CSS3" loading="lazy"><span>CSS3</span></div>
+    <div class="legend-cell"><img src="bootstrap-framework.png" alt="Bootstrap" loading="lazy"><span>BOOTSTRAP</span></div>
+    <div class="legend-cell"><img src="javascript.png" alt="JavaScript" loading="lazy"><span>JAVASCRIPT</span></div>
+    <div class="legend-cell"><img src="react.png" alt="React" loading="lazy"><span>REACT</span></div>
+    <div class="legend-cell"><img src="mysql.png" alt="MySQL" loading="lazy"><span>MYSQL</span></div>
+  </div>
+  <div class="legend-caption reveal"><span>KEY —</span> each mark represents a tool used across the case studies in Sheet 04.</div>
+</section>
+
+<section id="projects" class="wrap">
+  <div class="sheet-header reveal">
+    <span class="sheet-num">SHEET 04</span>
+    <h2>Projects.</h2>
+    <span class="sheet-tag">CASE FILES · 4 CLOSED</span>
+  </div>
+  <div class="ticket-grid">
+
+    <article class="ticket reveal" style="--reveal-delay:0s;">
+      <div class="ticket-img"><img src="image.png" alt="Parallax Effect project preview" loading="lazy"></div>
+      <div class="ticket-body">
+        <div class="ticket-meta"><span class="ticket-id">TICKET #001</span><span class="status-pill deployed">DEPLOYED</span></div>
+        <h3>Parallax Effect</h3>
+        <p>A pure HTML &amp; CSS parallax build, giving the page a layered scroll experience that departs from standard flat scrolling.</p>
+        <a class="ticket-link" href="https://ashiff30.github.io/Web-Design-Parallax-Effect/" target="_blank" rel="noopener">VIEW PROJECT →</a>
       </div>
+    </article>
 
-      <div class="row justify-content-md-center ms-5 text-center">
-        <div class="col-md-4 p-3 about-card">
-          <div class="card bg-dark-subtle about-card-section" style="width: 16rem;" data-aos="fade-right" data-aos-offset="200"
-    data-aos-delay="5"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false">
-            <h1 class="py-4"><i class="fa-solid fa-terminal"></i></h1>
-            <p>Frontend development</p>
-          </div>
-        </div>
-
-        <div class="col-md-4 py-3">
-          <div class="card bg-dark-subtle about-card-section" style="width: 16rem;" data-aos="fade-right" data-aos-offset="200"
-    data-aos-delay="5"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false">
-            <h1 class="py-4"><i class="fa-solid fa-network-wired"></i></h1>
-            <p>Backend development</p>
-          </div>
-        </div>
-
-        <div class="col-md-4 py-3">
-          <div class="card bg-dark-subtle about-card-section" style="width: 16rem;" data-aos="fade-right" data-aos-offset="200"
-    data-aos-delay="5"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false">
-            <h1 class="py-4"><i class="fa-solid fa-database"></i></h1>
-            <p>Database development</p>
-          </div>
-        </div>
+    <article class="ticket reveal" style="--reveal-delay:0.1s;">
+      <div class="ticket-img"><img src="Jewellary.png" alt="Jewellery e-commerce project preview" loading="lazy"></div>
+      <div class="ticket-body">
+        <div class="ticket-meta"><span class="ticket-id">TICKET #002</span><span class="status-pill live">LIVE</span></div>
+        <h3>E-commerce Site</h3>
+        <p>A jewellery storefront built with ReactJS, HTML, CSS, and Bootstrap — using component state to manage the catalogue and render UI seamlessly.</p>
+        <a class="ticket-link" href="https://ff-jewelry.netlify.app/" target="_blank" rel="noopener">VIEW PROJECT →</a>
       </div>
+    </article>
+
+    <article class="ticket reveal" style="--reveal-delay:0.2s;">
+      <div class="ticket-img"><img src="mysql%20back.png" alt="SQL case study project preview" loading="lazy"></div>
+      <div class="ticket-body">
+        <div class="ticket-meta"><span class="ticket-id">TICKET #003</span><span class="status-pill resolved">RESOLVED</span></div>
+        <h3>SQL Case Study</h3>
+        <p>A "Virtual Reality Gaming Analytics" case study built in MySQL, focused on data analysis, query optimisation, and database design.</p>
+        <a class="ticket-link" href="https://ashiff30.github.io/Sql-casestudy/" target="_blank" rel="noopener">VIEW PROJECT →</a>
+      </div>
+    </article>
+
+    <article class="ticket reveal" style="--reveal-delay:0.3s;">
+      <div class="ticket-img"><img src="frontpage.png" alt="Prime Video clone project preview" loading="lazy"></div>
+      <div class="ticket-body">
+        <div class="ticket-meta"><span class="ticket-id">TICKET #004</span><span class="status-pill deployed">DEPLOYED</span></div>
+        <h3>Prime Video Clone</h3>
+        <p>A pixel-close replica of the Prime Video landing page, built with HTML and CSS to sharpen layout and detail-matching skills.</p>
+        <a class="ticket-link" href="https://ashiff30.github.io/Primeclone/" target="_blank" rel="noopener">VIEW PROJECT →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="sheet-header reveal">
+    <span class="sheet-num">SHEET 05</span>
+    <h2>Get in touch.</h2>
+    <span class="sheet-tag">NEW TICKET</span>
+  </div>
+  <div class="contact-grid">
+    <form class="contact-form reveal" id="contactForm">
+      <div class="field">
+        <label for="name">YOUR NAME</label>
+        <input type="text" id="name" name="name" required placeholder="Jane Doe">
+      </div>
+      <div class="field">
+        <label for="email">EMAIL ADDRESS</label>
+        <input type="email" id="email" name="email" required placeholder="jane@email.com">
+      </div>
+      <div class="field">
+        <label for="message">MESSAGE</label>
+        <textarea id="message" name="message" rows="5" required placeholder="What can I help with?"></textarea>
+      </div>
+      <div class="submit-row">
+        <button type="submit" class="btn btn-primary">SUBMIT TICKET →</button>
+        <span class="form-note">Opens your email client — nothing is stored.</span>
+      </div>
+    </form>
+    <div class="contact-info reveal">
+      <div class="status-card"><span class="dot"></span>CURRENTLY OPEN TO NEW OPPORTUNITIES — TECHNICAL / APPLICATION / SAAS SUPPORT ROLES</div>
+      <div class="info-row"><span class="k">EMAIL</span><a href="mailto:ashiffmohd@gmail.com">ashiffmohd@gmail.com</a></div>
+      <div class="info-row"><span class="k">LINKEDIN</span><a href="https://linkedin.com/in/your-profile" target="_blank" rel="noopener">www.linkedin.com/in/ashiff-mohammed
+
+</a></div>
+      <div class="info-row"><span class="k">GITHUB</span><a href="https://github.com/ashiff30" target="_blank" rel="noopener">github.com/ashiff30</a></div>
+      <div class="info-row"><span class="k">LOCATION</span><span class="v">Chennai, India</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="skills-section py-5 text-light" id="skill">
-    <div class="container">
-      <div class="row ">
-        <div class="col-md-6">
-          <p>MY SKILLS</p>
-          <h1>TECHNOLOGIES.</h1>
-        </div>
-      </div>
+<footer class="wrap">
+  <span>© 2026 ASHIFF MOHAMMED M.S — ALL SYSTEMS OPERATIONAL</span>
+  <span>BUILT WITH HTML / CSS / JS</span>
+</footer>
 
-      <div class="container text-center skills-icon">
-        <div class="row d-flex justify-content-evenly text-center gap-5 icon-row">
-          <div class="col-md-1 p-3 box">
-            <div  class="card bg-transparent icon-section" style="width: 8rem;" data-aos="zoom-in-up">
-              <img src="html.png" alt="" class="icon-hover">
-            </div>
-          </div>
-  
-          <div class="col-md-1 p-3">
-            <div  class="card bg-transparent icon-section" style="width: 8rem;" data-aos="zoom-in-up">
-              <img src="css.png" alt="">
-            </div>
-          </div>
+<script>
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navlinks = document.getElementById('navlinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navlinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+  navlinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navlinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
 
-          <div class="col-md-1 p-3">
-            <div  class="card bg-transparent icon-section" style="width: 8rem;" data-aos="zoom-in-up">
-              <img src="bootstrap-framework.png" alt="">
-            </div>
-          </div>
-  
-          <div class="col-md-1 p-3">
-            <div  class="card bg-transparent icon-section" style="width: 8rem;" data-aos="zoom-in-up">
-              <img src="javascript.png" alt="">
-            </div>
-          </div>
-  
-          <div class="col-md-1 p-3">
-            <div  class="card bg-transparent icon-section" style="width: 8rem;" data-aos="zoom-in-up">
-              <img src="react.png" alt="">
-            </div>
-          </div>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
 
-          <div class="col-md-1 p-3">
-            <div  class="card bg-transparent icon-section" style="width: 8rem;" data-aos="zoom-in-up">
-              <img src="mysql.png" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-        
-    </div>
-  </section>
+  // Ticket card tilt-on-cursor
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+  if (!prefersReducedMotion && hasFinePointer) {
+    document.querySelectorAll('.ticket').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateX = ((y / rect.height) - 0.5) * -8;
+        const rotateY = ((x / rect.width) - 0.5) * 8;
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
 
-  <section class="py-4" id="Projects">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <p>CASE STUDIES</p>
-          <h1>Projects.</h1>
-          <p>Take a look at some of the standout projects I've worked on, each reflecting my dedication, innovation and skill.</p>
-        </div>
-      </div>
-      <div class="row justify-content-md-center">
-        <div class="col-md-3 ">
-          <div class="card project-card border-0 h-100" style="width: 16rem;" data-aos="zoom-in"
-          data-aos-offset="200"
-          data-aos-delay="10"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-mirror="true"
-          data-aos-once="false">
-            <img src="image.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Parallax-Effect</h5>
-              <p class="card-text">A parallax effect has been created using only HTML and CSS.<br><br> providing a unique scrolling experience that differs from standard scrolling behavior.</p>
-              <a href="https://ashiff30.github.io/Web-Design-Parallax-Effect/" class="btn btn-outline-secondary" target="_blank" rel="noopener noreferrer">View project</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card project-card border-0 h-100" style="width: 16rem;" data-aos="zoom-in"
-          data-aos-offset="200"
-          data-aos-delay="10"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-mirror="true"
-          data-aos-once="false">
-            <img src="Jewellary.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">e-commerce site</h5>
-              <p class="card-text">This project was built using ReactJS along with HTML, CSS, and Bootstrap. ReactJS has been used in several areas, such as managing component states efficiently and rendering UI elements seamlessly.</p>
-              <a href=" https://ff-jewelry.netlify.app/" target="_blank" class="btn btn-outline-secondary" rel="noopener noreferrer">View project</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card project-card border-0 h-100" style="width: 16rem;" data-aos="zoom-in"
-          data-aos-offset="200"
-          data-aos-delay="10"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-mirror="true"
-          data-aos-once="false">
-            <img src="mysql back.png" class="card-img-top" alt="..." id="mysql-back" >
-            <div class="card-body">
-              <h5 class="card-title">SQL-Case Study</h5>
-              <p class="card-text">A case study on "Virtual Reality Gaming Analytics" has been conducted using MySQL, focusing on data analysis, query optimization, and efficient database management.</p>
-              <a href=" https://ashiff30.github.io/Sql-casestudy/" class="btn btn-outline-secondary" target="_blank" rel="noopener noreferrer">View project</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="card project-card border-0 h-100" style="width: 16rem;" data-aos="zoom-in"
-          data-aos-offset="200"
-          data-aos-delay="10"
-          data-aos-duration="1000"
-          data-aos-easing="ease-in-out"
-          data-aos-mirror="true"
-          data-aos-once="false">
-            <img src="frontpage.png" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Prime video clone</h5>
-              <p class="card-text">Prime video clone was built using HTML, CSS. <br> Repliacted the exact prime vide website.</p>
-              <a href=" https://ashiff30.github.io/Primeclone/" class="btn btn-outline-secondary" rel="noopener noreferrer">View project</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="rounded-start bg-dark text-light py-2" id="contact">
-    <div class="container p-3">
-      <div class="row">
-        <div class="col-md-6">
-          <p>Get in touch</p>
-          <h1>Contact</h1>
-        </div>
-      </div>
-      <div class="row-6 py-4 ms-5 bg-secondary rounded text-dark d-flex justify-content-center">
-        <div class="col-md-6 p-4">
-          <form onsubmit="send(event)">
-            <div class="mb-3">
-              <label for="exampleInputname" class="form-label">Your Name</label>
-              <input type="text" class="form-control" id="user-input" aria-describedby="emailHelp" placeholder="Your name">
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="user-mail" aria-describedby="emailHelp" placeholder="Your email">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-           
-            <div class="form-floating">
-              <p>Your message<p>
-              <textarea class="form-control" placeholder="What's your message for me ?" id="user-message" style="height: 100px"></textarea>
-            </div>
-            <button type="submit" class="btn btn-outline-light mt-3 text-dark mail " class="btn-close" data-bs-dismiss="toast" aria-label="Close" id="liveToastBtn" onclick="notify()">Send<i class="fa-regular fa-paper-plane ms-1"></i></button> 
-          </form>
-
-          <div id="liveToast" class="toast top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
-           
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          
-          <div class="toast-body bg-success">
-            Thank you for your message!!.
-          </div>
-        </div>
-          
-            
-          
-          
-        </div>
-      </div>
-    </div>
-
-   
-  </section>
-
+  // Contact form -> mailto
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+    const subject = encodeURIComponent(`Portfolio contact from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:your.email@example.com?subject=${subject}&body=${body}`;
+  });
+</script>
 
 </body>
-<script src="script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>
 </html>
